@@ -1,6 +1,14 @@
+	TARGET = my_ngram
+	OBJ = my_ngram.o
+	SRC = my_ngram.c
+	CC = gcc
+	CFLAGS = -Wall -Wextra -Werror
+
+	.PHONY: all clean fclean re
+
 all : $(TARGET)
 $(TARGET) : $(OBJ)
-	gcc $(CFLAGS) -o $(TARGET) $(OBJ)
+	gcc $(CFLAGS) -o $(TARGET) $(OBJ) 
 
 
 $(OBJ) : $(SRC)
@@ -12,7 +20,7 @@ clean:
 
 
 fclean: clean
-	rm -f $(TARGET)
+	rm -f $(TARGET) *.exe
 
 
 re: fclean all

@@ -1,18 +1,28 @@
-#include "my_ngram.h"
 #include <stdio.h>
+#include <ctype.h>
 
-void count_characters(const char *text) {
-    int count[256] = {0};
-    
-    for (int i = 0; text[i] != '\0'; ++i) {
-        if (text[i] >= 0 && text[i] < 256) {
-            count[(int)text[i]]++;
+#define MAX_CHARS 256
+
+int main(int argc, char *argv[]) {
+    int char_counts[MAX_CHARS] = {0};
+
+    for (int i = 1; i < argc; i++) {
+        char *str = argv[i];
+
+        while (*str) {
+            char ch = tolower(*str);
+            if (isalnum(ch)) { 
+                char_counts[ch]++;
+            }
+            str++;
         }
     }
-    
-    for (int i = 0; i < 256; ++i) {
-        if (count[i] > 0) {
-            printf("%c:%d\n", (char)i, count[i]);
+
+    for (int ch = 0; ch < MAX_CHARS; ch++) {
+        if (char_counts[ch] > 0) {
+            printf("%c:%d\n", ch, char_counts[ch]);
         }
     }
+
+    return 0;
 }
